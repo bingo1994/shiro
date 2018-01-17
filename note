@@ -1,0 +1,37 @@
+系统管理员admin,密码123456
+
+认证策略：
+FirstSuccessfulStrategy、AtLeastOneSuccessfulStrategy(默认)、 AllSuccessfulStrategy
+
+Shiro 支持三种方式的授权：
+ – 编程式：通过写if/else 授权代码块完成 
+ Subject subject = SecurityUtils.getSubject();
+  if(subject.hasRole(“admin”)) {  
+     //有权限 
+     } else {   
+     //无权限 } 
+ – 注解式：通过在执行的Java方法上放置相应的注解完成，没有权限将抛出相 应的异常
+ @RequiresRoles("admin") 
+ public void hello() { 
+     //有权限 
+      } 
+ – JSP/GSP 标签：在JSP/GSP 页面通过相应的标签完成
+ <shiro:hasRole name="admin">
+  <!— 有权限 —>
+   </shiro:hasRole>
+   
+权限注解 ：
+@RequiresAuthentication
+@RequiresUser
+@RequiresGuest
+@RequiresRoles(value={“admin”, “user”}, logical= Logical.AND)
+@RequiresPermissions (value={“user:a”, “user:b”}, logical= Logical.OR)
+
+
+Shiro 标签:
+pincipal 标签：显示用户身份信息
+hasRole 标签：如果当前 Subject 有角色将显示 body 体内 容
+hasAnyRoles 标签：如果当前Subject有任意一个 角色（或的关系）将显示body体内容。
+lacksRole：如果当前 Subject 没有角色将显 示 body 体内容
+hasPermission：如果当前 Subject 有权限 将显示 body 体内容
+lacksPermission：如果当前Subject没有权 限将显示body体内容。
